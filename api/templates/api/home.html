@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'api/mdb.min.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2">
+                <h1>HOME</h1>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dashboard</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+                <div class="d-flex align-items-center">
+                    {% if user.is_authenticated %}
+                    <button type="button" class="btn btn-link px-3 me-2">
+                        <a href="{% url 'logout' %}"> Logout</a>
+                    </button>
+                    <button type="button" class="btn btn-link px-3 me-2">
+                        <a href="#"> Profile</a>
+                    </button>
+
+                    {% else %}
+                    <button type="button" class="btn btn-link px-3 me-2">
+                        <a href="{% url 'login' %}"> Log in</a>
+                    </button>
+                    <button type="button" class="btn btn-link px-3 me-2">
+                        <a href="{% url 'register' %}"> Sign up</a>
+                    </button>
+                    {% endif %}
+                    <a class="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i
+                            class="fab fa-account"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="container">ECP HOME!</h1>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>
